@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .nav{
+    @apply p-3 border-b text-[#32323f] flex content-center
+  }
+  .nav-inactive{
+    @apply bg-white 
+  }
+  .nav-active{
+    @apply bg-[#f3f4f6]
+  }
+  .table-style {
+    @apply w-full bg-gray-100 
+  }
+  .table-style thead{
+    @apply bg-gray-400
+  } 
+  .table-style th, td {
+    @apply border p-2 text-sm  border-gray-300
+  }
+
+  .booking{
+    @apply rounded-md
+  }
+
+    /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #32323f; 
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+}
