@@ -20,6 +20,7 @@ return new class extends Migration
             $table->String('alamat');
             $table->String('ktp');
             $table->String('telepon');
+            $table->date('tanggal');
             $table->String('jenis_kelamin');
             $table->String('status');
         });

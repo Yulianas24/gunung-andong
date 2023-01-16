@@ -4,10 +4,10 @@
 
 @layer components {
   .nav{
-    @apply p-3 border-b text-[#32323f] flex content-center
+    @apply p-3 border-b text-[#32323f] flex content-center 
   }
   .nav-inactive{
-    @apply bg-white 
+    @apply bg-white hover:bg-slate-100
   }
   .nav-active{
     @apply bg-[#f3f4f6]
@@ -23,7 +23,16 @@
   }
 
   .booking{
-    @apply rounded-md
+    @apply rounded-md my-2 text-sm w-full 
+  }
+  .card{
+    @apply flex-none flex w-[200px] lg:w-[24%] items-center mx-2 lg:mx-0 gap-3 h-auto  shadow-md shadow-gray-500/50 bg-white px-5 py-2 text-[#32323f] rounded-lg
+  }
+  .card:hover{
+  @apply cursor-default transition ease-in-out bg-indigo-50 scale-105
+  } 
+  label {
+    @apply text-sm
   }
 
     /* width */

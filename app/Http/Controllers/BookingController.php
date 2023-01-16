@@ -29,16 +29,16 @@ class BookingController extends Controller
     {
         $mytime = Carbon::now();
         if (request('sort') == 'today') {
-            $datas = Booking::whereDate('created_at', $mytime)->latest()->get();
+            $datas = Booking::whereDate('tanggal', $mytime)->latest()->paginate(10);
         } elseif (request('date')) {
-            $datas = Booking::whereDate('created_at', request('date'))->latest()->get();
+            $datas = Booking::whereDate('tanggal', request('date'))->latest()->paginate(10);
         } elseif (request('nama')) {
             $search = '%' . request('nama') . '%';
-            $datas = Booking::where('nama', 'like', $search)->latest()->get();
+            $datas = Booking::where('nama', 'like', $search)->latest()->paginate(10);
         } elseif (request('status')) {
-            $datas = Booking::where('status', 'like', request('status'))->latest()->get();
+            $datas = Booking::where('status', 'like', request('status'))->latest()->paginate(10);
         } else {
-            $datas = Booking::latest()->get();
+            $datas = Booking::latest()->paginate(10);
         }
         return view('data', [
             'datas' => $datas
@@ -58,6 +58,7 @@ class BookingController extends Controller
         $booking->alamat = $request->alamat;
         $booking->ktp = $request->ktp;
         $booking->telepon = $request->telepon;
+        $booking->tanggal = $request->tanggal;
         $booking->jenis_kelamin = $request->jenis_kelamin;
         $booking->status = 'pending';
         $booking->save();
@@ -97,13 +98,18 @@ class BookingController extends Controller
     public function terima($id)
     {
 
-        Booking::where('id', $id)->update(['status' => 'diterima']);
+        Booking::where('id', $id)->update(['status' => 'masuk']);
 
         return back();
     }
     public function tolak($id)
     {
-        Booking::where('id', $id)->update(['status' => 'ditolak']);
+        Booking::where('id', $id)->update(['status' => 'keluar']);
+        return back();
+    }
+    public function pending($id)
+    {
+        Booking::where('id', $id)->update(['status' => 'pending']);
         return back();
     }
 
