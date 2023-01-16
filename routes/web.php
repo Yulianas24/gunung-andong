@@ -26,8 +26,8 @@ Route::post('/booking', [BookingController::class, 'store']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/data', [BookingController::class, 'data'])->middleware(['auth', 'verified'])->name('data');
-Route::get('/data/{item:id}/terima', [BookingController::class, 'terima'])->middleware(['auth', 'verified']);
-Route::get('/data/{item:id}/tolak', [BookingController::class, 'tolak'])->middleware(['auth', 'verified']);
+Route::get('/data/{item:id}/masuk', [BookingController::class, 'terima'])->middleware(['auth', 'verified']);
+Route::get('/data/{item:id}/keluar', [BookingController::class, 'tolak'])->middleware(['auth', 'verified']);
 Route::get('/data/{item:id}/pending', [BookingController::class, 'pending'])->middleware(['auth', 'verified']);
 Route::delete('/data/{id}', [BookingController::class, 'destroy'])->middleware(['auth', 'verified']);
 

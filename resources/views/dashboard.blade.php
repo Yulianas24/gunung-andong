@@ -7,8 +7,8 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            {{-- card --}}
             <div class="flex justify-between sm:rounded-lg">
-                {{-- card --}}
                 <div class="card text-blue-800">
                     <div class="flex-none w-2 h-2 bg-blue-800 rounded-full"></div>
                     <div class="flex-grow leading-none">
@@ -45,6 +45,10 @@
                 </div>
                
             </div>
+            <div class="w-full h-24 mt-3 bg-slate-500">
+
+            </div>
+            {{-- end of card --}}
         </div>
     </div>
 </x-app-layout>

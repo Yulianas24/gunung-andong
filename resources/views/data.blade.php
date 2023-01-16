@@ -17,7 +17,7 @@
                     <x-dropdown align="left">
                         <x-slot name="trigger">
                             <button
-                                class="flex justify-center items-center px-3 h-8 border border-blue-600 text-sm rounded-md hover:cursor-pointer ">
+                                class="flex justify-center items-center px-3  h-8 border border-blue-600 text-sm rounded-md hover:cursor-pointer ">
                                 {{ request('status') == null ? 'status' : request('status') }}
                                 <i class="ri-arrow-down-s-line"></i>
                             </button>
@@ -35,7 +35,8 @@
                         </x-slot>
                     </x-dropdown>
                     <form method="get" class="flex">
-                        <input type="date" class="h-8 rounded-l-md border-r-0 text-sm w-full md:w-auto caret-pink-500" name="date">
+                        <input type="date" class="h-8 rounded-l-md border-r-0 text-sm w-full md:w-auto caret-pink-500" name="date"
+                        value="{{ request('date') }}">
                         <button
                             class="grid items-center px-3 h-8 border rounded-r-md border-blue-600 text-black  hover:bg-blue-600 hover:text-white text-sm"><i
                                 class="ri-search-2-line"></i></button>
@@ -75,54 +76,38 @@
                             <td>{{ $data->ktp }}</td>
                             <td>{{ $data->telepon }}</td>
                             <td class="text-center">{{ $data->jenis_kelamin }}</td>
-                            <td class="text-center">{{ $data->tanggal }}</td>
-                            <td class="text-center text-xs">
-                                <span
-                                    class="py-1 px-3 rounded-lg {{ $data->status == 'masuk' ? 'bg-green-200' : 
-                              ($data->status == 'keluar' ? 'bg-red-200' : 'bg-blue-200') }}">{{ $data->status }}</span>
+                            <td class="text-center">{{ $data->tanggal_masuk }}</td>
+                            <td class="">
+                                <x-dropdown align="right">
+                                    <x-slot name="trigger">
+                                        <button
+                                        class="py-[2px] px-3 justify-between  rounded-full text-[11px]  flex {{ $data->status == 'masuk' ? 'bg-green-200' : 
+                                        ($data->status == 'keluar' ? 'bg-red-200' : 'bg-blue-200') }}">
+                                            {{ $data->status }}
+                                            <i class="ri-arrow-down-s-line"></i>
+                                        </button>
+                                    </x-slot>
+                                    <x-slot name="content">
+                                        <x-dropdown-link href="/data/{{ $data->id }}/pending" class="rounded-none">
+                                            {{ __('pending') }}
+                                        </x-dropdown-link>
+                                        <x-dropdown-link href="/data/{{ $data->id }}/masuk" class="rounded-none">
+                                            {{ __('masuk') }}
+                                        </x-dropdown-link>
+                                        <x-dropdown-link href="/data/{{ $data->id }}/keluar" class="rounded-none">
+                                            {{ __('keluar') }}
+                                        </x-dropdown-link>
+                                    </x-slot>
+                                </x-dropdown>
+                                
+                                
                             </td>
-                            <td class="grid justify-items-center w-[80px] gap-2">
-                                @if ($data->status == 'pending')
-                                <div class="flex gap-2">
-                                    <a href="/data/{{ $data->id }}/terima"
-                                        class="px-2 p-[2px] bg-green-600 block w-7 align-middle text-center rounded-sm">
-                                        <i class="ri-check-line text-gray-200"></i>
-                                    </a>
-                                    <a href="/data/{{ $data->id }}/tolak"
-                                        class="px-2 p-[2px] bg-orange-600 block w-7 align-middle text-center rounded-sm">
-                                        <i class="ri-close-line text-gray-200"></i>
-                                    </a>
-                                </div>
-                                @else
-                                    @if ($data->status != 'masuk')
-                                    <div class="flex gap-2">
-                                        <a href="/data/{{ $data->id }}/terima"
-                                            class="px-2 p-[2px] bg-green-600 block w-7 align-middle text-center rounded-sm">
-                                            <i class="ri-check-line text-gray-200"></i>
-                                        </a>
-                                        <a href="/data/{{ $data->id }}/pending"
-                                            class="px-2 p-[2px] bg-yellow-600 block w-7 align-middle text-center rounded-sm">
-                                            <i class="ri-pause-mini-line text-gray-200"></i>
-                                        </a>
-                                    </div>
-                                    @else
-                                    <div class="flex gap-2">
-                                        <a href="/data/{{ $data->id }}/tolak"
-                                            class="px-2 p-[2px] bg-orange-600 block w-7 align-middle text-center rounded-sm">
-                                            <i class="ri-close-line text-gray-200"></i>
-                                        </a>
-                                        <a href="/data/{{ $data->id }}/pending"
-                                            class="px-2 p-[2px] bg-yellow-600 block w-7 align-middle text-center rounded-sm">
-                                            <i class="ri-pause-mini-line text-gray-200"></i>
-                                        </a>
-                                    </div>
-                                    @endif
-                                @endif
+                            <td>
                                 <form action="/data/{{ $data->id }}" method="post">
                                     @csrf
                                     @method("delete")
                                     <button type="submit" onclick="return confirm('Apakah anda yakin?')"
-                                        class="px-2 p-[2px] bg-red-600 block w-16 align-middle text-center rounded-sm">
+                                        class="px-2 p-[2px] bg-red-600 block w-16 align-middle text-center rounded-full">
                                         <i class="ri-delete-bin-line text-gray-200"></i>
                                     </button>
                                 </form>

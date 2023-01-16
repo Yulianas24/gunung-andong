@@ -34,7 +34,9 @@
   label {
     @apply text-sm
   }
-
+  .btn-aksi{
+    @apply px-2 p-[2px] block w-7 align-middle text-center rounded-sm
+  }
     /* width */
   ::-webkit-scrollbar {
     width: 10px;

@@ -23,7 +23,7 @@ class BookingFactory extends Factory
             'ktp' => '3306120000000003',
             'telepon' => '082135135135',
             'jenis_kelamin' => 'laki-laki',
-            'tanggal' => now(),
+            'tanggal_masuk' => now(),
             'status' => 'pending'
         ];
     }

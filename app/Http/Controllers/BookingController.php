@@ -29,14 +29,14 @@ class BookingController extends Controller
     {
         $mytime = Carbon::now();
         if (request('sort') == 'today') {
-            $datas = Booking::whereDate('tanggal', $mytime)->latest()->paginate(10);
+            $datas = Booking::whereDate('tanggal_masuk', $mytime)->latest()->paginate(10);
         } elseif (request('date')) {
-            $datas = Booking::whereDate('tanggal', request('date'))->latest()->paginate(10);
+            $datas = Booking::whereDate('tanggal_masuk', request('date'))->latest()->paginate(10);
         } elseif (request('nama')) {
             $search = '%' . request('nama') . '%';
             $datas = Booking::where('nama', 'like', $search)->latest()->paginate(10);
         } elseif (request('status')) {
-            $datas = Booking::where('status', 'like', request('status'))->latest()->paginate(10);
+            $datas = Booking::where('status', request('status'))->latest()->paginate(10);
         } else {
             $datas = Booking::latest()->paginate(10);
         }
@@ -58,7 +58,8 @@ class BookingController extends Controller
         $booking->alamat = $request->alamat;
         $booking->ktp = $request->ktp;
         $booking->telepon = $request->telepon;
-        $booking->tanggal = $request->tanggal;
+        $booking->tanggal_masuk = $request->tanggal_masuk;
+        $booking->tanggal_keluar = $request->tanggal_keluar;
         $booking->jenis_kelamin = $request->jenis_kelamin;
         $booking->status = 'pending';
         $booking->save();
