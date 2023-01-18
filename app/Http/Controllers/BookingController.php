@@ -61,7 +61,7 @@ class BookingController extends Controller
         $booking->tanggal_masuk = $request->tanggal_masuk;
         $booking->tanggal_keluar = $request->tanggal_keluar;
         $booking->jenis_kelamin = $request->jenis_kelamin;
-        $booking->status = 'pending';
+        $booking->status = 'belum masuk';
         $booking->save();
         return redirect('/')->with("success", "Booking Success");
     }
@@ -99,7 +99,7 @@ class BookingController extends Controller
     public function terima($id)
     {
 
-        Booking::where('id', $id)->update(['status' => 'masuk']);
+        Booking::where('id', $id)->update(['status' => 'sudah masuk']);
 
         return back();
     }
@@ -110,7 +110,7 @@ class BookingController extends Controller
     }
     public function pending($id)
     {
-        Booking::where('id', $id)->update(['status' => 'pending']);
+        Booking::where('id', $id)->update(['status' => 'belum masuk']);
         return back();
     }
 

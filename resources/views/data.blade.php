@@ -23,14 +23,11 @@
                             </button>
                         </x-slot>
                         <x-slot name="content">
-                            <x-dropdown-link href="/data?status=pending">
-                                {{ __('pending') }}
+                            <x-dropdown-link href="/data?status=belum masuk">
+                                {{ __('belum masuk') }}
                             </x-dropdown-link>
-                            <x-dropdown-link href="/data?status=masuk">
-                                {{ __('masuk') }}
-                            </x-dropdown-link>
-                            <x-dropdown-link href="/data?status=keluar">
-                                {{ __('keluar') }}
+                            <x-dropdown-link href="/data?status=sudah masuk">
+                                {{ __('sudah masuk') }}
                             </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
@@ -81,21 +78,17 @@
                                 <x-dropdown align="right">
                                     <x-slot name="trigger">
                                         <button
-                                        class="py-[2px] px-3 justify-between  rounded-full text-[11px]  flex {{ $data->status == 'masuk' ? 'bg-green-200' : 
-                                        ($data->status == 'keluar' ? 'bg-red-200' : 'bg-blue-200') }}">
+                                        class="py-[2px] px-3 justify-between  rounded-full text-[11px]  flex {{ $data->status == 'sudah masuk' ? 'bg-green-200' : 'bg-yellow-200' }}">
                                             {{ $data->status }}
                                             <i class="ri-arrow-down-s-line"></i>
                                         </button>
                                     </x-slot>
                                     <x-slot name="content">
                                         <x-dropdown-link href="/data/{{ $data->id }}/pending" class="rounded-none">
-                                            {{ __('pending') }}
+                                            {{ __('belum masuk') }}
                                         </x-dropdown-link>
                                         <x-dropdown-link href="/data/{{ $data->id }}/masuk" class="rounded-none">
-                                            {{ __('masuk') }}
-                                        </x-dropdown-link>
-                                        <x-dropdown-link href="/data/{{ $data->id }}/keluar" class="rounded-none">
-                                            {{ __('keluar') }}
+                                            {{ __('sudah masuk') }}
                                         </x-dropdown-link>
                                     </x-slot>
                                 </x-dropdown>
@@ -105,7 +98,7 @@
                             <td>
                                 <div class="flex w-full justify-items-center gap-2">
                                     <button onclick="detail({{ $data }})" 
-                                    class="px-2 p-[2px] bg-blue-600 block  align-middle rounded-md text-white">
+                                    class="px-2 p-[2px] bg-blue-600 block text-xs align-middle rounded-lg text-white">
                                     detail
                                 </button>
                                 
@@ -187,7 +180,7 @@
                         <div class="flex my-4 items-center">
                             <div class="w-1/2 flex-none">Status</div>
                             <p class="pr-2">:</p>
-                            <p class="text-blue-800 font-semibold bg-blue-100 py-1 px-3 rounded-xl text-[10px]">belum masuk</p>
+                            <p class="text-blue-800 font-semibold bg-blue-100 py-1 px-3 rounded-xl text-[10px]">${data.status}</p>
                         </div>
                         <div class="">
                             <form action="/data/${data.id}" method="post">

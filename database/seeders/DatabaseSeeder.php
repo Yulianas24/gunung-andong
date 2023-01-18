@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Booking::factory(10)->create([
             'tanggal_masuk' => date('2023-01-15 06:22:43'),
             'tanggal_keluar' => date('2023-01-16 06:22:43'),
-            'status' => 'keluar',
+            'status' => 'sudah masuk',
         ]);
 
         \App\Models\User::factory()->create([

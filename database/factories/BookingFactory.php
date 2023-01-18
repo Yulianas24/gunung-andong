@@ -24,7 +24,8 @@ class BookingFactory extends Factory
             'telepon' => '082135135135',
             'jenis_kelamin' => 'laki-laki',
             'tanggal_masuk' => now(),
-            'status' => 'pending'
+            'tanggal_keluar' => now(),
+            'status' => 'belum masuk'
         ];
     }
 }
