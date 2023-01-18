@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12" id="main">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             {{-- Navigasi pencarian --}}
             <div class=" md:flex mb-2 p-3 justify-between bg-white rounded-md shadow-sm shadow-black/30 ">
@@ -59,25 +59,25 @@
                     <thead>
                         <tr>
                             <th>Nama</th>
-                            <th>Alamat</th>
                             <th>nomor KTP</th>
                             <th>nomor telepon</th>
                             <th class="w-[80px]">Gender</th>
-                            <th class="w-[100px]">Tanggal</th>
+                            <th class="">Tanggal Naik</th>
+                            <th class="">Tanggal Turun</th>
                             <th>Status</th>
-                            <th class="w-[80px]">aksi</th>
+                            <th class="">aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($datas as $data)
                         <tr>
                             <td>{{ $data->nama }}</td>
-                            <td>{{ $data->alamat }}</td>
                             <td>{{ $data->ktp }}</td>
                             <td>{{ $data->telepon }}</td>
                             <td class="text-center">{{ $data->jenis_kelamin }}</td>
                             <td class="text-center">{{ $data->tanggal_masuk }}</td>
-                            <td class="">
+                            <td class="text-center">{{ $data->tanggal_keluar }}</td>
+                            <td class="text-center">
                                 <x-dropdown align="right">
                                     <x-slot name="trigger">
                                         <button
@@ -103,14 +103,13 @@
                                 
                             </td>
                             <td>
-                                <form action="/data/{{ $data->id }}" method="post">
-                                    @csrf
-                                    @method("delete")
-                                    <button type="submit" onclick="return confirm('Apakah anda yakin?')"
-                                        class="px-2 p-[2px] bg-red-600 block w-16 align-middle text-center rounded-full">
-                                        <i class="ri-delete-bin-line text-gray-200"></i>
-                                    </button>
-                                </form>
+                                <div class="flex w-full justify-items-center gap-2">
+                                    <button onclick="detail({{ $data }})" 
+                                    class="px-2 p-[2px] bg-blue-600 block  align-middle rounded-md text-white">
+                                    detail
+                                </button>
+                                
+                                </div>
                             </td>
                         </tr>
                         @endforeach
@@ -118,7 +117,100 @@
                 </table>
             </div>
             {{ $datas->links() }}
+           
         </div>
     </div>
+
+    {{-- popup --}}
+    
 </x-app-layout>
+
+<script>
+   
+    function detail(data){
+        var main = document.getElementById("main")
+        main.innerHTML += `
+        <div class="fixed top-0 left-0 w-screen h-screen bg-black/20" id="detail">
+            <div class="relative mx-auto mt-[15%] w-[50%] min-h-[40%] bg-white shadow-md shadow-black/25 p-7  border rounded-md gap-3" > 
+                <button class="absolute right-3 top-2  hover:text-red-700" onclick="closeDetail()">
+                    <i class="ri-close-circle-line text-2xl"></i>
+                </button>
+                <h1 class="w-full">Detail</h1>
+                <hr>
+                <div class="w-full flex gap-3 h-[calc(100%-24px)] text-sm">
+                    <div class="flex-none w-[55%]">
+                        {{-- Nama --}}
+                        <div class="flex my-4">
+                            <div class="w-[30%] flex-none">Nama</div>
+                            <p class="pr-2">:</p>
+                            <p>${data.nama}</p>
+                        </div>
+                        {{-- Alamat --}}
+                        <div class="flex my-4">
+                            <div class="w-[30%] flex-none">Alamat</div>
+                            <p class="pr-2">:</p>
+                            <p class="text-xs">${data.alamat}</p>
+                        </div>
+                        {{-- Jenis Kelamin --}}
+                        <div class="flex my-4">
+                            <div class="w-[30%] flex-none">Jenis Kelamin</div>
+                            <p class="pr-2">:</p>
+                            <p>${data.jenis_kelamin}</p>
+                        </div>
+                        {{-- NIK --}}
+                        <div class="flex my-4">
+                            <div class="w-[30%] flex-none">NIK</div>
+                            <p class="pr-2">:</p>
+                            <p>${data.ktp}</p>
+                        </div>
+                        {{-- Telepon --}}
+                        <div class="flex my-4">
+                            <div class="w-[30%] flex-none">Telepon</div>
+                            <p class="pr-2">:</p>
+                            <p>${data.telepon}</p>
+                        </div>
+                    </div>
+                    <div class="relative flex-none w-[45%]">
+                        {{-- Tanggal Naik --}}
+                        <div class="flex my-4">
+                            <div class="w-1/2 flex-none">Tanggal Naik</div>
+                            <p class="pr-2">:</p>
+                            <p>${data.tanggal_masuk}</p>
+                        </div>
+                        {{-- Tanggal Turun --}}
+                        <div class="flex my-4">
+                            <div class="w-1/2 flex-none">Tanggal Turun</div>
+                            <p class="pr-2">:</p>
+                            <p>${data.tanggal_keluar}</p>
+                        </div>
+                        {{-- Status --}}
+                        <div class="flex my-4 items-center">
+                            <div class="w-1/2 flex-none">Status</div>
+                            <p class="pr-2">:</p>
+                            <p class="text-blue-800 font-semibold bg-blue-100 py-1 px-3 rounded-xl text-[10px]">belum masuk</p>
+                        </div>
+                        <div class="">
+                            <form action="/data/${data.id}" method="post">
+                                @csrf
+                                @method("delete")
+                                <button type="submit" onclick="return confirm('Apakah anda yakin?')"
+                                    class="px-2 p-[2px] bg-red-600 block text-white align-middle text-center rounded-sm">
+                                    hapus 
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `
+       
+    }
+
+    function closeDetail(){
+        // console.log('test')
+        document.getElementById("detail").outerHTML = "";
+    }
+    
+</script>
 

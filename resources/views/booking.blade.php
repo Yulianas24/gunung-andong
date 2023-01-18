@@ -76,7 +76,11 @@
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1" style="color: white;">jenis kelamin</label>
-                <input type="text" class="form-control" name="jenis_kelamin" placeholder="Jenis Kelamin">
+                <select name="jenis_kelamin" class="form-control" style="height: 60px">
+                  <option value="laki-laki">Laki-Laki</option>
+                  <option value="perempuan">Perempuan</option>
+                </select>
+                
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1" style="color: white;">Alamat</label>
