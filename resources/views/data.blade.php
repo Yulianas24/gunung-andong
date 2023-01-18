@@ -29,6 +29,9 @@
                             <x-dropdown-link href="/data?status=sudah masuk">
                                 {{ __('sudah masuk') }}
                             </x-dropdown-link>
+                            <x-dropdown-link href="/data?status=batal naik">
+                                {{ __('batal naik') }}
+                            </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
                     <form method="get" class="flex">
@@ -75,6 +78,7 @@
                             <td class="text-center">{{ $data->tanggal_masuk }}</td>
                             <td class="text-center">{{ $data->tanggal_keluar }}</td>
                             <td class="text-center">
+                                @if ($data->status != 'batal naik')
                                 <x-dropdown align="right">
                                     <x-slot name="trigger">
                                         <button
@@ -92,6 +96,12 @@
                                         </x-dropdown-link>
                                     </x-slot>
                                 </x-dropdown>
+                                @else
+                                <button
+                                class="py-[2px] px-3 justify-between  rounded-full text-[11px]  flex bg-red-200">
+                                    {{ $data->status }}
+                                </button>
+                                @endif
                                 
                                 
                             </td>

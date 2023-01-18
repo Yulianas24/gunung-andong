@@ -28,15 +28,20 @@ class BookingController extends Controller
     public function data()
     {
         $mytime = Carbon::now();
+        $yesterday = Carbon::yesterday();
+
+        Booking::where('tanggal_masuk', '<=', $yesterday)->where('status', 'belum masuk')->update(['status' => 'batal naik']);
+
+
         if (request('sort') == 'today') {
-            $datas = Booking::whereDate('tanggal_masuk', $mytime)->latest()->paginate(10);
+            $datas = Booking::whereDate('tanggal_masuk', $mytime)->latest()->paginate(100);
         } elseif (request('date')) {
-            $datas = Booking::whereDate('tanggal_masuk', request('date'))->latest()->paginate(10);
+            $datas = Booking::whereDate('tanggal_masuk', request('date'))->latest()->paginate(100);
         } elseif (request('nama')) {
             $search = '%' . request('nama') . '%';
-            $datas = Booking::where('nama', 'like', $search)->latest()->paginate(10);
+            $datas = Booking::where('nama', 'like', $search)->latest()->paginate(100);
         } elseif (request('status')) {
-            $datas = Booking::where('status', request('status'))->latest()->paginate(10);
+            $datas = Booking::where('status', request('status'))->latest()->paginate(100);
         } else {
             $datas = Booking::latest()->paginate(10);
         }
