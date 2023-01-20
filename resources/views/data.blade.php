@@ -82,7 +82,7 @@
                                 <x-dropdown align="right">
                                     <x-slot name="trigger">
                                         <button
-                                        class="py-[2px] px-3 justify-center  rounded-full text-[11px]  flex {{ $data->status == 'sudah masuk' ? 'bg-green-200' : 'bg-yellow-200' }}">
+                                        class="py-[2px] px-3 justify-between  rounded-full text-[11px]  flex {{ $data->status == 'sudah masuk' ? 'bg-green-200' : 'bg-yellow-200' }}">
                                             {{ $data->status }}
                                             <i class="ri-arrow-down-s-line"></i>
                                         </button>
@@ -98,7 +98,7 @@
                                 </x-dropdown>
                                 @else
                                 <button
-                                class="py-[2px] px-3 justify-center  rounded-full text-[11px]  flex  {{ $data->status == 'sudah masuk' ? 'bg-green-200' : ($data->status == 'belum masuk' ? 'bg-yellow-200' : 'bg-red-200') }} ">
+                                class="py-[2px] px-3 justify-between  rounded-full text-[11px]  flex  {{ $data->status == 'sudah masuk' ? 'bg-green-200' : ($data->status == 'belum masuk' ? 'bg-yellow-200' : 'bg-red-200') }} ">
                                     {{ $data->status }}
                                 </button>
                                 @endif

@@ -15,6 +15,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     {{-- Remix icon --}}
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    @livewireStyles
 </head>
 
 <body class="font-sans antialiased">
@@ -36,6 +37,7 @@
             </main>
         </div>
     </div>
+    @livewireScripts
 </body>
 
 </html>
