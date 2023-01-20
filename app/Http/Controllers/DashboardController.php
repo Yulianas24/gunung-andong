@@ -10,6 +10,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        $yesterday = Carbon::yesterday();
+
+        Booking::where('tanggal_masuk', '<=', $yesterday)->where('status', 'belum masuk')->update(['status' => 'batal naik']);
+        
         if (request("status")) {
             $datas = Booking::where('status', request("status"))->whereDate('tanggal_masuk', Carbon::now())->orderBy('nama')->paginate(15);
         } elseif (request("nama")) {

@@ -97,11 +97,11 @@
   
               <div class="form-group">
                 <label for="exampleInputEmail1" style="color: white;">Tanggal Naik</label>
-                <input type="date" class="form-control" min="<?php  echo date("Y-m-d") ?>" name="tanggal_masuk" placeholder="Tanggal Naik">
+                <input type="date" class="form-control" min="{{ date("Y-m-d") }}" name="tanggal_masuk" placeholder="Tanggal Naik">
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1" style="color: white;">Tanggal Turun</label>
-                <input type="date" min="<?php  echo date("Y-m-d") ?>" name="tanggal_keluar" class="form-control" id="exampleInputEmail1" placeholder="Tanggal Turun">
+                <input type="date" min="{{ date("Y-m-d") }}" name="tanggal_keluar" class="form-control" id="exampleInputEmail1" placeholder="Tanggal Turun">
               </div>
               <!-- <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">

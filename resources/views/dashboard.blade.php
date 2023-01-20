@@ -101,13 +101,13 @@
                                 <td class="text-center">{{ $data->tanggal_masuk }}</td>
                                 <td class="text-center">{{ $data->tanggal_keluar }}</td>
                                 <td class="text-center">
-                                    <p class="py-[2px] px-3 justify-between  rounded-full text-[11px]  flex {{ $data->status == 'sudah masuk' ? 'bg-green-200' : 'bg-yellow-200' }}">
+                                    <p class="py-[2px] px-3 justify-center rounded-full text-[11px]  flex {{ $data->status == 'sudah masuk' ? 'bg-green-200' : 'bg-yellow-200' }}">
                                         {{ $data->status }}
                                     </p>
                                 </td>
                                 <td>
                                     @if ($data->status == 'belum masuk')
-                                    <a href="/data/{{ $data->id }}/masuk" class="py-[2px] px-3 justify-between  rounded-full text-[11px]  flex bg-green-600 hover:bg-green-700 text-white">
+                                    <a href="/data/{{ $data->id }}/masuk" class="py-[2px] px-3 justify-center  rounded-full text-[11px]  flex bg-green-600 hover:bg-green-700 text-white">
                                         masuk
                                     </a>
                                     @else
