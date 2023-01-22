@@ -4,7 +4,7 @@
 
 @layer components {
   .nav{
-    @apply p-3 border-b text-[#32323f] flex content-center 
+    @apply p-3 text-[#32323f] flex content-center hover:text-black pl-7
   }
   .nav-inactive{
     @apply bg-white hover:bg-slate-100

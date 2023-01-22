@@ -32,20 +32,44 @@ class BookingController extends Controller
 
         Booking::where('tanggal_masuk', '<=', $yesterday)->where('status', 'belum masuk')->update(['status' => 'batal naik']);
 
-
+        
         if (request('sort') == 'today') {
-            $datas = Booking::whereDate('tanggal_masuk', $mytime)->latest()->paginate(100);
+            $datas = Booking::whereYear('tanggal_masuk', $mytime->format('Y'))->whereDate('tanggal_masuk', $mytime)->latest()->paginate(100);
         } elseif (request('date')) {
-            $datas = Booking::whereDate('tanggal_masuk', request('date'))->latest()->paginate(100);
+            $datas = Booking::whereYear('tanggal_masuk', $mytime->format('Y'))->whereDate('tanggal_masuk', request('date'))->latest()->paginate(100);
         } elseif (request('nama')) {
             $search = '%' . request('nama') . '%';
-            $datas = Booking::where('nama', 'like', $search)->latest()->paginate(100);
+            $datas = Booking::whereYear('tanggal_masuk', $mytime->format('Y'))->where('nama', 'like', $search)->latest()->paginate(100);
         } elseif (request('status')) {
-            $datas = Booking::where('status', request('status'))->latest()->paginate(100);
+            $datas = Booking::whereYear('tanggal_masuk', $mytime->format('Y'))->where('status', request('status'))->latest()->paginate(100);
         } else {
-            $datas = Booking::latest()->paginate(10);
+            $datas = Booking::whereYear('tanggal_masuk', $mytime->format('Y'))->latest()->paginate(10);
         }
         return view('data', [
+            'datas' => $datas
+        ]);
+    }
+
+
+    public function riwayat()
+    {
+        $mytime = Carbon::now();
+        $yesterday = Carbon::yesterday();
+
+        Booking::where('tanggal_masuk', '<=', $yesterday)->where('status', 'belum masuk')->update(['status' => 'batal naik']);
+
+
+    if (request('tahun')) {
+            $datas = Booking::whereYear('tanggal_masuk', request('tahun'))->latest()->paginate(100);
+        } elseif (request('nama')) {
+            $search = '%' . request('nama') . '%';
+            $datas = Booking::whereYear('tanggal_masuk', '!=', $mytime->format('Y'))->where('nama', 'like', $search)->latest()->paginate(100);
+        } elseif (request('status')) {
+            $datas = Booking::whereYear('tanggal_masuk', '!=', $mytime->format('Y'))->where('status', request('status'))->latest()->paginate(100);
+        } else {
+            $datas = Booking::whereYear('tanggal_masuk', '!=', $mytime->format('Y'))->latest()->paginate(10);
+        }
+        return view('riwayat', [
             'datas' => $datas
         ]);
     }
@@ -106,11 +130,6 @@ class BookingController extends Controller
 
         Booking::where('id', $id)->update(['status' => 'sudah masuk']);
 
-        return back();
-    }
-    public function tolak($id)
-    {
-        Booking::where('id', $id)->update(['status' => 'keluar']);
         return back();
     }
     public function pending($id)

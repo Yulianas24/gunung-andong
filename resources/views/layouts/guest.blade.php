@@ -20,9 +20,10 @@
                     <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
                 </a> --}}
                 <div class="grid justify-items-center overflow-hidden items-center w-28 h-28 rounded-full bg-white">
-                    <img src="{{ asset('asset\andonggg.jpg') }}" class="" alt="">
+                    <img src="{{ asset('img\logobaru.png') }}" class="" alt="">
                 </div>
             </div>
+            <h1 class="text-center font-bold text-lg pt-2">Login Admin Andong</h1>
 
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
                 {{ $slot }}

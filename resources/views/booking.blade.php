@@ -38,7 +38,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav text-uppercase ml-auto">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="index.html#service">Melayani</a>
+              <a class="nav-link js-scroll-trigger" href="/">Melayani</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="index.html#portfolio">Gunung</a>
@@ -67,41 +67,47 @@
           </div>
         </div>
           
-          <form action="/booking" method="post">
+          <form action="/booking" method="post" style="width: 70%; margin: 0px auto">
             @csrf
               <center><label for="exampleInputEmail1" style="color: white;">Form Booking Online</label></center><hr style="background:  white;">
               <div class="form-group">
                 <label for="exampleInputEmail1" style="color: white;">Nama Lengkap</label>
-                <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap">
+                <input required type="text" class="form-control" name="nama" placeholder="Nama Lengkap"
+                style="height: 40px">
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1" style="color: white;">jenis kelamin</label>
-                <select name="jenis_kelamin" class="form-control" style="height: 60px">
+                <select name="jenis_kelamin" class="form-control" style="height: 40px">
                   <option value="laki-laki">Laki-Laki</option>
                   <option value="perempuan">Perempuan</option>
                 </select>
                 
               </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1" style="color: white;">Alamat</label>
-                <input type="text" class="form-control" name="alamat" placeholder="Alamat">
-              </div>
+              
               <div class="form-group">
                 <label for="exampleInputEmail1" style="color: white;">Identitas KTP</label>
-                <input type="number" class="form-control" name="ktp" placeholder="NIK">
+                <input required type="number" class="form-control" name="ktp" placeholder="NIK" style="height: 40px">
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1" style="color: white;">No Telp/HP</label>
-                <input type="number" class="form-control" name="telepon" placeholder="No Telp/HP">
+                <input required type="number" class="form-control" name="telepon" placeholder="No Telp/HP" style="height: 40px">
               </div>
-  
-              <div class="form-group">
-                <label for="exampleInputEmail1" style="color: white;">Tanggal Naik</label>
-                <input type="date" class="form-control" min="{{ date("Y-m-d") }}" name="tanggal_masuk" placeholder="Tanggal Naik">
+              
+              <div class="row form-group" style="margin-bottom: 0px;">
+                <div class="form-group col">
+                  <label for="exampleInputEmail1" style="color: white;">Tanggal Naik</label>
+                  <input style="height: 40px" type="date" class="form-control" min="{{ date("Y-m-d") }}" name="tanggal_masuk" placeholder="Tanggal Naik" required>
+                </div>
+                <div class="form-group col">
+                  <label for="exampleInputEmail1" style="color: white;">Tanggal Turun</label>
+                  <input style="height: 40px" type="date" min="{{ date("Y-m-d") }}" name="tanggal_keluar" class="form-control" id="exampleInputEmail1" placeholder="Tanggal Turun" required>
+                </div>
               </div>
+
               <div class="form-group">
-                <label for="exampleInputEmail1" style="color: white;">Tanggal Turun</label>
-                <input type="date" min="{{ date("Y-m-d") }}" name="tanggal_keluar" class="form-control" id="exampleInputEmail1" placeholder="Tanggal Turun">
+                <label for="exampleInputEmail1" style="color: white;">Alamat</label>
+                <textarea required class="form-control" name="alamat" placeholder="Alamat"
+                style="height: 90px"></textarea>
               </div>
               <!-- <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
