@@ -116,7 +116,7 @@
             <p class="pt-2">{{ __('Dashboard') }}</p>
         </x-nav-link>
         {{-- Data Pendakian --}}
-        <div class="flex h-10 items-center pl-3 border-t mt-3">
+        <div class="flex h-10 items-center pl-3 border-t">
             <i class="ri-book-mark-fill mr-2 text-[24px]"></i>
             <h1 class="">DATA PENDAKIAN</h1>
         </div>
@@ -139,7 +139,7 @@
             <i class="ri-arrow-right-s-fill"></i>
             <p class="">{{ __('Profile') }}</p>
         </x-nav-link>
-        <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
+        <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
             <i class="ri-arrow-right-s-fill"></i>
             <p class="">{{ __('Daftar Admin') }}</p>
         </x-nav-link>

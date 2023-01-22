@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 
@@ -16,4 +17,16 @@ class DashboardController extends Controller
 
         return view('dashboard');
     }
+
+    public function admin(){
+        return view('admin', [
+            'daftarAdmin' => User::latest()->paginate(10),
+        ]);
+    }
+
+    public function destroy($id){
+        User::where('id', $id)->delete();
+        return back();
+    }
+
 }

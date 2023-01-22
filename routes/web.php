@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,13 @@ Route::get('/data/{item:id}/masuk', [BookingController::class, 'terima'])->middl
 Route::get('/data/{item:id}/keluar', [BookingController::class, 'tolak'])->middleware(['auth', 'verified']);
 Route::get('/data/{item:id}/pending', [BookingController::class, 'pending'])->middleware(['auth', 'verified']);
 Route::delete('/data/{id}', [BookingController::class, 'destroy'])->middleware(['auth', 'verified']);
+
+
+Route::get('admin', [DashboardController::class, 'admin'])->name('admin')->middleware(['auth', 'verified']);
+Route::delete('/admin/{id}', [DashboardController::class, 'destroy'])->middleware(['auth', 'verified']);
+
+Route::get('register', [RegisteredUserController::class, 'create'])->name('register')->middleware(['auth', 'verified']);
+Route::post('register', [RegisteredUserController::class, 'store'])->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
